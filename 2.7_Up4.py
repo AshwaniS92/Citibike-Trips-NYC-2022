@@ -1,10 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# ## Imoprting Libraries
-
-# In[10]:
-
 import os
 import streamlit as st
 import pandas as pd
@@ -18,74 +11,32 @@ from datetime import datetime as dt
 from numerize.numerize import numerize
 from PIL import Image
 
-
-# In[11]:
-
-
-########################## Import data ###########################################################################################
-
+########################## Import data ###########################
 # Path to the exported CSV file
-file_path = '/Users/ashwanisherawat/citibike_env/bin/top20.csv'
-
-
-# In[12]:
-
-
-# Path to the exported CSV file
-path = '/Users/ashwanisherawat/citibike_env/bin/debug_combined_df.csv'
-#import os module
-path = f"{os.getcwd()}/debug_combined_df.csv"
 file_path = f"{os.getcwd()}/top20.csv"
+path = f"{os.getcwd()}/debug_combined_df.csv"
 
-# In[13]:
-
-
-
-
-# Read the Pickle file into a DataFrame
+# Read the data files
 top20 = pd.read_csv(file_path)
-
-
-# In[14]:
-
-
-# Read the Pickle file into a DataFrame
 df = pd.read_csv(path)
-
-
-# In[15]:
-
 
 # Generate all column names
 column_names = df.columns
-
-# Display the column names
 print("Column names:")
 for col in column_names:
     print(col)
 
+########################### Initial settings ######################
 
-# In[16]:
-
-
-########################### Initial settings for the dashboard ####################################################
-
-
-st.set_page_config(page_title = 'Citi Bikes Strategy Dashboard', layout='wide')
+st.set_page_config(page_title='Citi Bikes Strategy Dashboard', layout='wide')
 st.title("Citi Bikes Strategy Dashboard")
 
 # Define side bar
 st.sidebar.title("Aspect Selector")
 page = st.sidebar.selectbox('Select an aspect of the analysis',
-  ["Intro page","Weather component and bike usage",
-   "Most popular stations",
-    "Interactive map with aggregated bike trips", "Recommendations"])
-
-
-# In[17]:
-
-
-# Define the pages
+    ["Intro page", "Weather component and bike usage",
+     "Most popular stations",
+     "Interactive map with aggregated bike trips", "Recommendations"])
 
 # Intro page
 if page == "Intro page":
@@ -97,13 +48,15 @@ if page == "Intro page":
     st.markdown("- Recommendations")
     st.markdown("The dropdown menu on the left 'Aspect Selector' will take you to the different aspects of the analysis our team looked at.")
 
-    myImage = Image.open("/Users/ashwanisherawat/citibike_env/bin/Citi bike images/istockphoto-2190292731-612x612.jpg")
-    st.image(myImage)
-    
+    try:
+        myImage = Image.open("istockphoto-2190292731-612x612.jpg")
+        st.image(myImage, caption="Citi Bike Image")
+    except FileNotFoundError:
+        st.error("Image not found: istockphoto-2190292731-612x612.jpg")
 
 # Weather component and bike usage
 elif page == "Weather component and bike usage":
-     fig_2 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig_2 = make_subplots(specs=[[{"secondary_y": True}]])
 
     fig_2.add_trace(
         go.Scatter(x=df['date'], y=df['trip_count'], name='Daily bike rides', marker={'color': 'blue'}),
@@ -123,22 +76,21 @@ elif page == "Weather component and bike usage":
     st.plotly_chart(fig_2, use_container_width=True)
     st.markdown("There is an obvious correlation between the rise and drop of temperatures and their relationship with the frequency of bike trips taken daily. As temperatures plunge, so does bike usage. This insight indicates that the shortage problem may be prevalent merely in the warmer months, approximately from May to October.")
 
-# Most popular stations page
+# Most popular stations
 elif page == "Most popular stations":
-    # Define the total rides
     total_rides = float(top20['value'].sum())
     st.metric(label='Total Bike Rides', value=numerize(total_rides))
 
-    # Bar chart
-    top20 = top20.nlargest(20, 'value')  # Ensure top 20 stations are selected
+    top20 = top20.nlargest(20, 'value')
     fig = go.Figure(
         go.Bar(
             x=top20['value'],
             y=top20['start_station_name'],
-            orientation='h',  # Horizontal orientation
+            orientation='h',
             marker={'color': top20['value'], 'colorscale': 'Blues'}
         )
     )
+
     fig.update_layout(
         title='Top 20 most popular bike stations',
         xaxis_title='Sum of trips',
@@ -146,6 +98,7 @@ elif page == "Most popular stations":
         width=900,
         height=600
     )
+
     st.plotly_chart(fig, use_container_width=True)
     st.markdown("From the bar chart it is clear that there are some start stations that are more popular than others. In the top 3, we can see W 21 St & 6 Ave, West St & Chambers St, and Broadway & W 58 St. There is a significant jump between the highest and lowest bars of the plot, indicating clear preferences for the leading stations. This is a finding that we could cross-reference with the interactive map that you can access through the sidebar select box.")
 
@@ -153,19 +106,17 @@ elif page == "Most popular stations":
 elif page == "Interactive map with aggregated bike trips":
     st.write("Interactive map showing aggregated bike trips over New York")
 
-    path_to_html = "/Users/ashwanisherawat/citibike_env/bin/Citi Bike Trips Aggregated_50000.html"
+    path_to_html = "Citi Bike Trips Aggregated_50000.html"
+    try:
+        with open(path_to_html, 'r') as f:
+            html_data = f.read()
 
-    # Read file and keep in variable
-    with open(path_to_html, 'r') as f:
-        html_data = f.read()
+        st.header("Aggregated Bike Trips in New York")
+        st.components.v1.html(html_data, height=1000)
+    except FileNotFoundError:
+        st.error(f"HTML file not found: {path_to_html}")
 
-    # Show in webpage
-    st.header("Aggregated Bike Trips in New York")
-    st.components.v1.html(html_data, height=1000)
     st.markdown("#### Using the filter on the left-hand side of the map we can check whether the most popular start stations also appear in the most popular trips.")
-    st.markdown("The most popular start stations are:")
-    st.markdown("Streeter Drive/Grand Avenue, Canal Street/Adams Street as well as Clinton Street/Madison Street.")
- 
     st.markdown("### Key Observations:")
     st.markdown("""
     1. **High Activity in Manhattan**: Central and lower Manhattan have the highest trip densities, driven by commercial and tourist hotspots.
@@ -175,18 +126,15 @@ elif page == "Interactive map with aggregated bike trips":
     5. **Focused Analysis**: Filters highlight high-demand routes and stations effectively.
     """)
 
-# Conclusions and recommendations
+# Recommendations
 else:
     st.header("Conclusions and recommendations")
-    bikes = Image.open("/Users/ashwanisherawat/citibike_env/bin/Citi bike images/istockphoto-2181208335-612x612.jpg")
-    st.image(bikes)
+    try:
+        bikes = Image.open("istockphoto-2181208335-612x612.jpg")
+        st.image(bikes, caption="Citi Bike Recommendations Image")
+    except FileNotFoundError:
+        st.error("Image not found: istockphoto-2181208335-612x612.jpg")
+
     st.markdown("### Our analysis has shown that Citi Bikes should focus on the following objectives moving forward:")
     st.markdown("- Add more stations to the locations around the water line, such as Theater on the Lake, Streeter Dr/Grand Avenue, Millenium Park, Columbus Dr/Randolph Street, Shedd Aquarium, Michigan Avenue/Oak Street, Canal Street/Adams Street.")
     st.markdown("- Ensure that bikes are fully stocked in all these stations during the warmer months in order to meet the higher demand, but provide a lower supply in winter and late autumn to reduce logistics costs.")
-
-
-# In[ ]:
-
-
-
-
