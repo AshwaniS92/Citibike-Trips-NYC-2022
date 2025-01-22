@@ -74,8 +74,14 @@ elif page == "Weather component and bike usage":
     )
 
     st.plotly_chart(fig_2, use_container_width=True)
-    st.markdown("There is an obvious correlation between the rise and drop of temperatures and their relationship with the frequency of bike trips taken daily. As temperatures plunge, so does bike usage. This insight indicates that the shortage problem may be prevalent merely in the warmer months, approximately from May to October.")
-
+    st.markdown("### Key Observations from the Chart:")
+    st.markdown("""
+    1. **Weather Impact**: Bike usage increases in warmer months (May–October) and drops in colder months, correlating with temperature changes.
+    2. **Seasonal Demand**: High demand during warm months likely leads to bike shortages, aligning with customer complaints.
+    3. **Redistribution Gaps**: Current bike management may not meet demand surges during peak seasons.
+    4. **Focus Period**: Shortages are most prominent in warmer months, requiring targeted solutions.
+    """)
+    
 # Most popular stations
 elif page == "Most popular stations":
     total_rides = float(top20['value'].sum())
