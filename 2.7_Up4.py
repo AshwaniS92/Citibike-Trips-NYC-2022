@@ -134,7 +134,12 @@ else:
         st.image(bikes, caption="Citi Bike Recommendations Image")
     except FileNotFoundError:
         st.error("Image not found: istockphoto-2181208335-612x612.jpg")
-
-    st.markdown("### Our analysis has shown that Citi Bikes should focus on the following objectives moving forward:")
-    st.markdown("- Add more stations to the locations around the water line, such as Theater on the Lake, Streeter Dr/Grand Avenue, Millenium Park, Columbus Dr/Randolph Street, Shedd Aquarium, Michigan Avenue/Oak Street, Canal Street/Adams Street.")
-    st.markdown("- Ensure that bikes are fully stocked in all these stations during the warmer months in order to meet the higher demand, but provide a lower supply in winter and late autumn to reduce logistics costs.")
+        
+        st.markdown("### Our analysis highlights key factors contributing to bike shortages and uneven usage patterns across Citi Bike stations:")
+        st.markdown("""
+    1. **Seasonal Variability**: Bike usage peaks during warmer months (May–October) and drops significantly in colder months, driven by temperature variations. This seasonal demand surge likely leads to complaints about bike unavailability.
+    2. **High-Demand Stations**: Specific stations in central and lower Manhattan, such as W 21 St & 6 Ave, West St & Chambers St, and Broadway & W 58 St, dominate usage. However, this high concentration of activity creates imbalances in supply and demand.
+    3. **Uneven Regional Activity**: Peripheral areas, such as northern Manhattan and some outer boroughs, show lower activity, indicating underutilization of resources.
+    4. **Regional Connectivity**: Significant travel links between Manhattan, Jersey City, and Brooklyn emphasize the need for better infrastructure and bike management across these hubs.
+    5. **Redistribution Gaps**: Current operational strategies may not sufficiently address the variability in demand, especially during peak seasons and at high-traffic stations.
+    """)
