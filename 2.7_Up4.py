@@ -33,9 +33,16 @@ file_path = '/Users/ashwanisherawat/citibike_env/bin/top20.csv'
 
 # Path to the exported CSV file
 path = '/Users/ashwanisherawat/citibike_env/bin/debug_combined_df.csv'
+#import os module
+import os
 
+
+#Print the updated directory path
+print ("Updated directory:" , os.getcwd())
 
 # In[13]:
+
+
 
 
 # Read the Pickle file into a DataFrame
