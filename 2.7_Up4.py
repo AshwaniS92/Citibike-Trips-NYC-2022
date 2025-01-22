@@ -113,6 +113,7 @@ elif page == "Most popular stations":
     - Address low activity in underperforming regions.
     - Optimize station placement and marketing in key zones.
     """)
+    
 Insights:
 •	Expand infrastructure in high-demand areas.
 •	Address low activity in underperforming regions.
