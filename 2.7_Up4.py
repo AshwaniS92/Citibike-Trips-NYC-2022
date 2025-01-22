@@ -5,7 +5,7 @@
 
 # In[10]:
 
-
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -34,11 +34,8 @@ file_path = '/Users/ashwanisherawat/citibike_env/bin/top20.csv'
 # Path to the exported CSV file
 path = '/Users/ashwanisherawat/citibike_env/bin/debug_combined_df.csv'
 #import os module
-import os
-
-
-#Print the updated directory path
-print ("Updated directory:" , os.getcwd())
+path = f"{os.getcwd()}/debug_combined_df.csv"
+file_path = f"{os.getcwd()}/top20.csv"
 
 # In[13]:
 
