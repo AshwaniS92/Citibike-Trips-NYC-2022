@@ -37,28 +37,6 @@ path = '/Users/ashwanisherawat/citibike_env/bin/debug_combined_df.csv'
 path = f"{os.getcwd()}/debug_combined_df.csv"
 file_path = f"{os.getcwd()}/top20.csv"
 
-
-
-
-# Resolve the image paths (relative to the current working directory)
-bikes = "istockphoto-2181208335-612x612.jpg"
-myImage = "istockphoto-2190292731-612x612.jpg"
-
-# Check if the images exist in the current directory
-if os.path.exists(bikes_path) and os.path.exists(myImage):
-    # Load and display the images
-    bikes = Image.open(bikes)
-    myImage = Image.open(myImage)
-    
-    st.image(bikes, caption="Bikes Image")
-    st.image(myImage, caption="My Image")
-else:
-    # Show error messages if the files are missing
-    if not os.path.exists(bikes):
-        st.error(f"Image not found: {bikes}")
-    if not os.path.exists(myImage):
-        st.error(f"Image not found: {myImage}")
-
 # In[13]:
 
 
