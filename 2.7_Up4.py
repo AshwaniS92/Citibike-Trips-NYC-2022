@@ -97,15 +97,8 @@ if page == "Intro page":
     st.markdown("- Recommendations")
     st.markdown("The dropdown menu on the left 'Aspect Selector' will take you to the different aspects of the analysis our team looked at.")
 
-# Relative path to the images
-myImage_path = "istockphoto-2190292731-612x612.jpg"
-
-try:
-    # Load and display the image
-    myImage = Image.open(myImage_path)
-    st.image(myImage, caption="Citi Bike Image")
-except FileNotFoundError:
-    st.error(f"Image not found: {myImage_path}")
+    myImage = Image.open("/Users/ashwanisherawat/citibike_env/bin/Citi bike images/istockphoto-2190292731-612x612.jpg")
+    st.image(myImage)
     
 
 # Weather component and bike usage
