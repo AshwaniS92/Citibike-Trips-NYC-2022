@@ -37,8 +37,7 @@ path = '/Users/ashwanisherawat/citibike_env/bin/debug_combined_df.csv'
 path = f"{os.getcwd()}/debug_combined_df.csv"
 file_path = f"{os.getcwd()}/top20.csv"
 
-bikes = f"{os.getcwd()}/istockphoto-2181208335-612x612.jpg"
-myImage = f"{os.getcwd()}/Citi bike images/istockphoto-2190292731-612x612.jpg"
+
 
 
 # Resolve the image paths (relative to the current working directory)
