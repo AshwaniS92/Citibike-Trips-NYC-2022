@@ -109,8 +109,8 @@ except FileNotFoundError:
     
 
 # Weather component and bike usage
- elif page == "Weather component and bike usage":
-    fig_2 = make_subplots(specs=[[{"secondary_y": True}]])
+elif page == "Weather component and bike usage":
+     fig_2 = make_subplots(specs=[[{"secondary_y": True}]])
 
     fig_2.add_trace(
         go.Scatter(x=df['date'], y=df['trip_count'], name='Daily bike rides', marker={'color': 'blue'}),
