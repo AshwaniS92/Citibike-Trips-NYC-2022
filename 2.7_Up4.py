@@ -100,8 +100,23 @@ elif page == "Most popular stations":
     )
 
     st.plotly_chart(fig, use_container_width=True)
-    st.markdown("From the bar chart it is clear that there are some start stations that are more popular than others. In the top 3, we can see W 21 St & 6 Ave, West St & Chambers St, and Broadway & W 58 St. There is a significant jump between the highest and lowest bars of the plot, indicating clear preferences for the leading stations. This is a finding that we could cross-reference with the interactive map that you can access through the sidebar select box.")
-
+    st.markdown("### Key Observations from the Chart:")
+    st.markdown("""
+    1. **Highly Popular Stations**: The top three stations—W 21 St & 6 Ave, West St & Chambers St, and Broadway & W 58 St—account for the highest number of bike trips, indicating their critical importance.
+    2. **Skewed Usage**: There is a notable gap between the most and least popular stations within the top 20, suggesting uneven station usage across the city.
+    3. **Demand-Driven Strategy**: Popular stations likely experience shortages during peak periods due to higher trip volumes. Ensuring adequate bike availability at these locations is essential.
+    4. **Cross-Referencing**: These findings align with insights from the interactive map, further emphasizing the importance of high-demand stations in Manhattan.
+    """)
+    st.markdown("### Insights:")
+    st.markdown("""
+    - Expand infrastructure in high-demand areas.
+    - Address low activity in underperforming regions.
+    - Optimize station placement and marketing in key zones.
+    """)
+Insights:
+•	Expand infrastructure in high-demand areas.
+•	Address low activity in underperforming regions.
+•	Optimize station placement and marketing in key zones.")
 # Interactive map with aggregated bike trips
 elif page == "Interactive map with aggregated bike trips":
     st.write("Interactive map showing aggregated bike trips over New York")
